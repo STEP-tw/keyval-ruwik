@@ -148,7 +148,15 @@ describe("strict parser that is case insensitive",function(){
 describe("strict parser that is case sensitive",function(){
   it("should throw error when specified keys are in lower case and actual is not",function(){
     let kvParser=new StrictParser(["name"],true);
-    // true indicates that parser is case sensitive
+    assert.throws(()=>{
+      kvParser.parse("NAME=manindra");
+    })
+  });
+});
+
+describe("strict parser when bool is not passed should take true as default",function(){
+  it("should throw error when specified keys are in lower case and actual is not",function(){
+    let kvParser=new StrictParser(["name"]);
     assert.throws(()=>{
       kvParser.parse("NAME=manindra");
     })
