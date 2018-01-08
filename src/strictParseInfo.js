@@ -18,8 +18,12 @@ StrictParseInfo.prototype=Object.create(ParseInfo.prototype);
 
 StrictParseInfo.prototype.pushKeyValuePair=function() {
   let currentKey = this.currentKey;
-  if(!this.caseSensitive) currentKey = this.currentKey.toLowerCase();
-  if(!contains(this.validKeys,currentKey))
+  let validKeysList = this.validKeys;
+  if(!this.caseSensitive) {
+    currentKey = this.currentKey.toLowerCase();
+    validKeysList = validKeysList.map(function(element){return element.toLowerCase()});
+  }
+  if(!contains(validKeysList,currentKey))
     throw new InvalidKeyError("invalid key",this.currentKey,this.currentPos);
   this.parsedKeys[this.currentKey]=this.currentValue;
   this.resetKeysAndValues();
