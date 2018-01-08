@@ -214,7 +214,7 @@ describe("error handling",function(){
       () => {
         kvParser.parse("key=")
       },
-      errorChecker("key",3,MissingValueError))
+    errorChecker("key",3,MissingValueError))
   });
 
   it("throws error on missing value when value is quoted",function(){
